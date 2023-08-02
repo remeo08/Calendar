@@ -9,7 +9,20 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "@chakra-ui/react": "^2.8.0",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "axios": "^1.4.0",
+    "framer-motion": "^10.15.0",
+    "prettier": "^3.0.0",
+    "react-helmet": "^6.1.0",
+    "react-hook-form": "^7.45.2",
+    "react-icons": "^4.10.1",
+    "react-query": "^3.39.3",
+    "react-router-dom": "^6.14.2",
+    "styled-components": "^6.0.6",
+    "styled-reset": "^4.5.1"
   },
   "scripts": {
     "start": "react-scripts start",
