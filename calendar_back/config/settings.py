@@ -29,8 +29,15 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
-
-INSTALLED_APPS = [
+CUSTOM_APPS=[
+    'users.apps.UsersConfig',
+    'teams.apps.TeamsConfig',
+    'schedules.apps.SchedulesConfig',
+    'nicknames.apps.NicknamesConfig',
+    'comments.apps.CommentsConfig',
+    'corsheaders',
+]
+SYSTEM_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,14 +46,18 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
+INSTALLED_APPS = SYSTEM_APPS + CUSTOM_APPS
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -122,3 +133,8 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = "users.User"
+
+# 배포할 때 모든 도메인 허용한 것에서 특정 도메인만 허용하도록 수정할 것
+CORS_ALLOWED_ORIGINS = ['http://127.0.0.1:3000','http://localhost:3000',]
+# 요청 헤더에 인증 정보를 포함
+CORS_ALLOW_CREDENTIALS = True

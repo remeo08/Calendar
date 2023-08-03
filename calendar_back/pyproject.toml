@@ -2,13 +2,14 @@
 name = "calendar-back"
 version = "0.1.0"
 description = ""
-authors = [byungyong <quddyddlrk@naver.com>"]
+authors = ["byungyong <quddyddlrk@naver.com>"]
 readme = "README.md"
 packages = [{include = "calendar_back"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
 django = "^4.2.4"
+django-cors-headers = "^4.2.0"
 
 
 [build-system]
