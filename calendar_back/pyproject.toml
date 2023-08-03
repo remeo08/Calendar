@@ -2,7 +2,7 @@
 name = "calendar-back"
 version = "0.1.0"
 description = ""
-authors = ["byungyong <quddyddlrk@naver.com>"]
+authors = ["dozzzini <dozzzini@naver.com>"]
 readme = "README.md"
 packages = [{include = "calendar_back"}]
 
