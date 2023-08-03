@@ -1,20 +1,29 @@
-// import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-// import routes from './routes';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import routes from './routes';
 
-import Main from './screens/Main';
+import Layout from './screens/Layout';
 import SignUp from './screens/SignUp';
 import Welcome from './screens/Welcome';
+import Login from './screens/Login';
+
+import { useState } from 'react';
+import { Reset } from 'styled-reset';
 
 function App() {
+  const [isLogin, setIsLogin] = useState(true);
+
   return (
-    <div>app</div>
-    // <Router>
-    //   <Routes>
-    //     <Route path={routes.main} element={<Main />} />
-    //     <Route path={routes.signup} element={<SignUp />} />
-    //     <Route path={routes.welcome} element={<Welcome />} />
-    //   </Routes>
-    // </Router>
+    <Router>
+      <Reset />
+      <Routes>
+        <Route
+          path={routes.layout}
+          element={isLogin ? <Layout /> : <Login />}
+        />
+        <Route path={routes.signup} element={<SignUp />} />
+        <Route path={routes.welcome} element={<Welcome />} />
+      </Routes>
+    </Router>
   );
 }
 
