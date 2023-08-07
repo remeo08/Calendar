@@ -5,8 +5,8 @@ const MakeTeamModalContainer = styled.div`
   display: flex;
   flex-direction: column;
   position: absolute;
-  width: 997px;
-  height: 550px;
+  width: 80%;
+  height: 86%;
   border-radius: 10px;
   justify-content: center;
   align-items: center;
@@ -15,8 +15,8 @@ const MakeTeamModalContainer = styled.div`
   z-index: 99;
 `;
 const Wrapper = styled.div`
-  width: 260px;
-  height: 260px;
+  width: 22vw;
+  height: 46vh;
   background-color: white;
   border-radius: 10px;
   padding: 0px 16px;
