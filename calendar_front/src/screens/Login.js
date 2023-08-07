@@ -1,5 +1,5 @@
-function Login() {
-    <div>Login</div>
-}
+const Login = () => {
+  <form></form>;
+};
 
 export default Login;
