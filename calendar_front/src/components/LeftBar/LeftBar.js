@@ -11,8 +11,7 @@ const LeftBarContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  width: 44px;
-  height: 550px;
+  width: 3.5vw;
   background-color: rgb(255, 255, 255);
   border-radius: 14px 0 0 14px;
 `;
@@ -22,32 +21,32 @@ const Wrapper = styled.div`
   width: 100%;
 `;
 const Column = styled.div`
-  padding: 12px;
+  padding: 13px;
 `;
 const Icon = styled.div`
-  width: 20px;
-  height: 20px;
+  width: 1.5vw;
+  height: 3vh;
   background-color: rgb(255, 165, 180);
   border-radius: 15px;
 `;
 const MyCalendarIcon = styled.button`
-  width: 20px;
-  height: 20px;
+  width: 1.5vw;
+  height: 3vh;
   border-radius: 15px;
   border: none;
   background-color: rgb(192, 246, 229);
 `;
 const TeamCalendarIcon = styled.button`
-  width: 20px;
-  height: 20px;
+  width: 1.5vw;
+  height: 3vh;
   border-radius: 15px;
   background-color: rgb(221, 203, 254);
 
   border: none;
 `;
 const MakeTeam = styled.div`
-  width: 20px;
-  height: 20px;
+  width: 1.5vw;
+  height: 3vh;
   border-radius: 15px;
   background-color: rgb(255, 165, 180);
   color: white;

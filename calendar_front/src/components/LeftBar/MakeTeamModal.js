@@ -11,7 +11,7 @@ const MakeTeamModalContainer = styled.div`
   justify-content: center;
   align-items: center;
   backdrop-filter: blur(3px);
-  background-color: rgb(245, 147, 152, 0.1);
+  background-color: rgb(145, 147, 152, 0.1);
   z-index: 99;
 `;
 const Wrapper = styled.div`

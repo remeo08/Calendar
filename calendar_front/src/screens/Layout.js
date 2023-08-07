@@ -9,36 +9,34 @@ const Container = styled.div`
   font-color: grey;
   display: flex;
   align-items: center;
-  height: 643px;
+  height: 100vh;
 `;
 const Wrapper = styled.div`
   display: flex;
   margin: 0 auto;
-  max-width: 997px;
+  max-width: 80vw;
   width: 100%;
-  left: 120px;
   border-radius: 10px;
-  border: 1px solid rgb(237, 70, 78);
   -webkit-box-shadow:
-    0 2px 20px rgba(251, 0, 27, 0.1),
-    0 2px 20px rgba(251, 0, 27, 0.1);
+    0 2px 20px rgba(255, 0, 22, 0.1),
+    0 2px 20px rgba(255, 0, 22, 0.1);
 `;
 
 const MiddlePartWrap = styled.div`
-  width: 733px;
+  width: 68vw;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: rgb(255, 255, 255);
-  border-right: 1px solid rgb(237, 70, 78);
-  border-left: 1px solid rgb(237, 70, 78);
+  border-right: 1px solid rgb(235, 237, 239);
+  border-left: 1px solid rgb(235, 237, 239);
 `;
 
 const CalendarContainer = styled.div`
-  background-color: rgb(254, 248, 243);
-  border-top: 1px solid rgb(237, 70, 78);
+  background-color: rgb(249, 245, 240);
+  border-top: 1px solid lightgrey;
   width: 100%;
-  height: 506px;
+  height: 79vh;
   overflow: auto;
   display: flex;
   flex-direction: column;
@@ -47,19 +45,18 @@ const CalendarContainer = styled.div`
 `;
 const CalenderHead = styled.div`
   width: 100%;
-  margin-bottom: 18px;
+  margin: 3vh 0;
   text-align: center;
   font-weight: 800;
   color: rgb(18, 1, 48);
 `;
 const Calendar = styled.div`
   width: 98%;
-  height: 458px;
+  height: 71vh;
   background-color: rgb(255, 255, 255);
   border-radius: 10px 10px 0 0;
-  border: 1px solid rgb(255, 183, 191);
   border-bottom: none;
-  box-shadow: 0px 4px 10px 0px rgb(255, 13, 39, 0.3);
+  box-shadow: 0px 4px 10px 0px rgb(0, 13, 39, 0.3);
 `;
 
 function Layout() {
