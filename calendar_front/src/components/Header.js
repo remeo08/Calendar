@@ -5,7 +5,7 @@ const HeaderContainer = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 7vh;
+  height: 7.2vh;
 `;
 const SearchBox = styled.input`
   border: 1px solid rgb(237, 70, 78);
