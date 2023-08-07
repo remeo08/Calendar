@@ -1,19 +1,18 @@
 import { styled } from 'styled-components';
 
 const TeamListContainer = styled.div`
-  width: 190px;
+  width: 17vw;
   background-color: rgb(255, 255, 255);
-  border-left: 1px solid rgb(246, 163, 167);
   z-index: 98;
   display: flex;
   overflow: hidden;
   flex-direction: column;
-  box-shadow: 10px 0px 30px -10px rgb(255, 13, 39, 0.3);
+  box-shadow: 10px 0px 30px -10px rgb(0, 13, 39, 0.3);
 `;
 const Wrapper = styled.div``;
 const TeamListHeader = styled.div`
   width: 98%;
-  height: 30px;
+  height: 5vh;
   border-bottom: 1px solid rgb(255, 240, 230);
   padding-top: 14px;
   padding-left: 14px;
