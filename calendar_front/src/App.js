@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import routes from './routes';
 
 import Layout from './screens/Layout';
-import SignUp from './screens/SignUp';
+// import SignUp from './screens/SignUp';
 import Welcome from './screens/Welcome';
 import Login from './screens/Login';
 
@@ -20,7 +20,7 @@ function App() {
           path={routes.layout}
           element={isLogin ? <Layout /> : <Login />}
         />
-        <Route path={routes.signup} element={<SignUp />} />
+        {/* <Route path={routes.signup} element={<SignUp />} /> */}
         <Route path={routes.welcome} element={<Welcome />} />
       </Routes>
     </Router>
