@@ -1,52 +1,55 @@
-import React from 'react';
-import Calendar from '@toast-ui/react-calendar';
+import React, { useEffect } from 'react';
+import Calendar from '@toast-ui/calendar';
 import '@toast-ui/calendar/dist/toastui-calendar.min.css';
+import 'tui-date-picker/dist/tui-date-picker.css';
+import 'tui-time-picker/dist/tui-time-picker.css';
+
+const DEFAULT_MONTH_OPTIONS = {
+  dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+  visibleWeeksCount: 0,
+  workweek: false,
+  narrowWeekend: false,
+  startDayOfWeek: 0,
+  isAlways6Weeks: true,
+  visibleEventCount: 6,
+};
 
 function TUICalendar() {
-  const calendars = [{ id: 'cal1', name: 'Personal' }];
-  const initialEvents = [
-    {
-      id: '1',
-      calendarId: 'cal1',
-      title: 'Lunch',
-      category: 'time',
-      start: '2022-06-28T12:00:00',
-      end: '2022-06-28T13:30:00',
-    },
-    {
-      id: '2',
-      repeat: '',
-      start: '2023-08-10T15:00:00',
-      end: '2023-08-10T15:30:00',
-      calendarId: 'cal1',
-      title: '말복',
-      description: '내용',
-      color: '색상',
-      status: '상태',
-      category: 'time',
-      user: '유저',
-      team: '팀',
-    },
-  ];
+  useEffect(() => {
+    const container = document.querySelector('.container');
+    const calendar = new Calendar(container, {
+      defaultView: 'month',
+      useFormPopup: true,
+      useDetailPopup: true,
+      ...DEFAULT_MONTH_OPTIONS,
+    });
 
-  const onAfterRenderEvent = (event) => {
-    console.log(event.title);
-  };
+    calendar.createEvents([
+      {
+        id: 'event1',
+        calendarId: 'cal1',
+        title: 'Weekly Meeting',
+        start: '2023-08-30T09:00:00',
+        end: '2023-08-31T10:00:00',
+      },
+    ]);
+
+    const firstEvent = calendar.getEvent('event1', 'cal1');
+
+    console.log(firstEvent.title);
+  }, []);
 
   return (
-    <div>
-      <Calendar
-        height="420px"
-        view="month"
-        month={{
-          dayNames: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
-          visibleWeeksCount: 4,
-        }}
-        calendars={calendars}
-        events={initialEvents}
-        onAfterRenderEvent={onAfterRenderEvent}
-      />
-    </div>
+    <>
+      <div>
+        <today />
+        <button className="prevmonth_btn" />
+        <button className="nextmonth_btn" />
+      </div>
+      <div className="container" style={{ height: '100%' }}></div>
+    </>
   );
 }
+
+// calendar.render();
 export default TUICalendar;
