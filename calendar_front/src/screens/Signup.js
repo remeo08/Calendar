@@ -10,6 +10,7 @@ const SignupContainer = styled.div`
 `;
 const Title = styled.div`
   font-size: 20px;
+  font-weight: bold;
   margin: 50px;
 `;
 
@@ -30,10 +31,18 @@ const Wrapper = styled.div`
   margin-bottom: 15px;
 `;
 
+const Label = styled.div`
+  font-size: 16px;
+  font-weight: bold;
+`;
+
 const ErrorMessage = styled.small`
   color: red;
   font-size: 12px;
+  width: 280px;
+  margin-left: 50px;
   margin-top: -10px;
+  margin-bottom: 15px;
 `;
 
 const Signup = ({
@@ -54,29 +63,27 @@ const Signup = ({
       <Title>회원가입</Title>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Wrapper>
-          <label htmlFor="id">
-            아이디
-            <input
-              id="id"
-              type="text"
-              aria-invalid={
-                isSubmitted ? (errors.id ? 'true' : 'false') : undefined
-              }
-              {...register('id', {
-                required: '아이디는 필수 입력입니다.',
-                minLength: {
-                  value: 4,
-                  message: '4자리 이상 입력해주세요.',
-                },
-              })}
-            />
-          </label>
-        </Wrapper>
+          <Label htmlFor="id">아이디</Label>
+          <input
+            id="id"
+            type="text"
+            aria-invalid={
+              isSubmitted ? (errors.id ? 'true' : 'false') : undefined
+            }
+            {...register('id', {
+              required: '아이디는 필수 입력입니다.',
+              minLength: {
+                value: 4,
+                message: '4자리 이상 입력해주세요.',
+              },
+            })}
+          />
+        </Wrapper>{' '}
         {errors.id && (
           <ErrorMessage role="alert">{errors.id.message}</ErrorMessage>
-        )}{' '}
+        )}
         <Wrapper>
-          <label htmlFor="password">비밀번호</label>
+          <Label htmlFor="password">비밀번호</Label>
           <input
             id="password"
             type="password"
@@ -96,7 +103,7 @@ const Signup = ({
           <ErrorMessage role="alert">{errors.password.message}</ErrorMessage>
         )}
         <Wrapper>
-          <label htmlFor="passwordConfirm">비밀번호 확인</label>
+          <Label htmlFor="passwordConfirm">비밀번호 확인</Label>
           <input
             id="passwordConfirm"
             type="password"
@@ -129,7 +136,7 @@ const Signup = ({
           </ErrorMessage>
         )}
         <Wrapper>
-          <label htmlFor="email">이메일</label>
+          <Label htmlFor="email">이메일</Label>
           <input
             id="email"
             type="text"
@@ -149,7 +156,7 @@ const Signup = ({
           <ErrorMessage role="alert">{errors.email.message}</ErrorMessage>
         )}
         <Wrapper>
-          <label htmlFor="name">이름</label>
+          <Label htmlFor="name">이름</Label>
           <input
             id="name"
             type="text"
