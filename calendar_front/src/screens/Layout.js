@@ -3,30 +3,44 @@ import { styled } from 'styled-components';
 import Header from '../components/Header';
 import LeftBar from '../components/LeftBar/LeftBar';
 import RightBar from '../components/RightBar/RightBar';
-import Calendar from '../components/MainCalendar/Calendar';
+import TUICalendar from '../components/MainCalendar/Calendar';
 
 const Container = styled.div`
+  font-color: grey;
   display: flex;
   align-items: center;
-  background-color: rgb(255, 232, 230);
-  height: 643px;
+  height: 100vh;
 `;
 const Wrapper = styled.div`
   display: flex;
   margin: 0 auto;
-  max-width: 907px;
+  max-width: 80vw;
   width: 100%;
-  padding: 40px;
+  border-radius: 10px;
+  -webkit-box-shadow:
+    0 2px 20px rgba(255, 0, 22, 0.1),
+    0 2px 20px rgba(255, 0, 22, 0.1);
 `;
 
 const MiddlePartWrap = styled.div`
-  width: 643px;
+  width: 68vw;
+  height: 86vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(255, 255, 255);
+  border-right: 1px solid rgb(235, 237, 239);
+  border-left: 1px solid rgb(235, 237, 239);
 `;
 
 const CalendarContainer = styled.div`
-  background-color: rgb(255, 248, 242);
-  height: 476px;
+  border-top: 1px solid lightgrey;
+  width: 99%;
+  height: 91%;
   overflow: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
 `;
 
 function Layout() {
@@ -37,7 +51,7 @@ function Layout() {
         <MiddlePartWrap>
           <Header />
           <CalendarContainer>
-            <Calendar />
+            <TUICalendar />
           </CalendarContainer>
         </MiddlePartWrap>
         <RightBar />

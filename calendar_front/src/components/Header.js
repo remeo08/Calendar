@@ -5,12 +5,12 @@ const HeaderContainer = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 44px;
-  background-color: rgb(255, 240, 236);
+  height: 7.2vh;
 `;
 const SearchBox = styled.input`
-  border: none;
+  border: 1px solid rgb(237, 70, 78);
   padding-left: 10px;
+  border-radius: 7px;
 `;
 
 function Header() {

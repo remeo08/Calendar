@@ -1,12 +1,17 @@
 import { styled } from 'styled-components';
+import React, { useState } from 'react';
 
+import TeamList from './TeamList';
+import MakeTeamModal from './MakeTeamModal';
+const Container = styled.div`
+  display: flex;
+`;
 const LeftBarContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  width: 44px;
-  height: 520px;
+  width: 3.5vw;
   background-color: rgb(255, 255, 255);
   border-radius: 14px 0 0 14px;
 `;
@@ -16,60 +21,74 @@ const Wrapper = styled.div`
   width: 100%;
 `;
 const Column = styled.div`
-  padding: 12px;
+  padding: 13px;
 `;
 const Icon = styled.div`
-  width: 20px;
-  height: 20px;
-  background-color: rgb(255, 232, 230);
+  width: 1.5vw;
+  height: 3vh;
+  background-color: rgb(255, 165, 180);
   border-radius: 15px;
 `;
-const MyCalendarIcon = styled.div`
-  width: 20px;
-  height: 20px;
+const MyCalendarIcon = styled.button`
+  width: 1.5vw;
+  height: 3vh;
   border-radius: 15px;
-  background-color: rgb(255, 240, 236);
+  border: none;
+  background-color: rgb(192, 246, 229);
 `;
-const TeamCalendarIcon = styled.div`
-  width: 20px;
-  height: 20px;
+const TeamCalendarIcon = styled.button`
+  width: 1.5vw;
+  height: 3vh;
   border-radius: 15px;
-  background-color: rgb(255, 240, 236);
+  background-color: rgb(221, 203, 254);
+
+  border: none;
 `;
 const MakeTeam = styled.div`
-  width: 20px;
-  height: 20px;
+  width: 1.5vw;
+  height: 3vh;
   border-radius: 15px;
-  background-color: rgb(255, 232, 230);
-  color: orange;
+  background-color: rgb(255, 165, 180);
+  color: white;
   text-align: center;
 `;
+
 function LeftBar() {
+  const [visible, setVisible] = useState(false);
+  const [addTeam, setAddTeam] = useState(false);
   return (
-    <LeftBarContainer>
-      <Wrapper>
-        <Column>
-          <Icon />
-        </Column>
-        <Column>
-          <MyCalendarIcon />
-        </Column>
-        <Column>
-          <TeamCalendarIcon />
-        </Column>
-        <Column>
-          <TeamCalendarIcon />
-        </Column>
-        <Column>
-          <TeamCalendarIcon />
-        </Column>
-      </Wrapper>
-      <Wrapper>
-        <Column>
-          <MakeTeam>+</MakeTeam>
-        </Column>
-      </Wrapper>
-    </LeftBarContainer>
+    <Container>
+      <LeftBarContainer>
+        <Wrapper>
+          <Column>
+            <Icon />
+          </Column>
+          <Column>
+            <MyCalendarIcon name="My" />
+          </Column>
+          <Column>
+            <TeamCalendarIcon
+              onClick={() => {
+                setVisible(!visible);
+              }}
+            ></TeamCalendarIcon>
+          </Column>
+        </Wrapper>
+        <Wrapper>
+          <Column>
+            <MakeTeam
+              onClick={() => {
+                setAddTeam(!addTeam);
+              }}
+            >
+              {addTeam ? '-' : '+'}
+            </MakeTeam>
+          </Column>
+        </Wrapper>
+      </LeftBarContainer>
+      {visible && <TeamList />}
+      {addTeam && <MakeTeamModal />}
+    </Container>
   );
 }
 
