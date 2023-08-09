@@ -28,7 +28,6 @@ const MiddlePartWrap = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: rgb(255, 255, 255);
   border-right: 1px solid rgb(235, 237, 239);
   border-left: 1px solid rgb(235, 237, 239);
 `;
@@ -47,7 +46,7 @@ function Layout() {
   return (
     <Container>
       <Wrapper>
-        <LeftBar />
+        <LeftBar></LeftBar>
         <MiddlePartWrap>
           <Header />
           <CalendarContainer>
