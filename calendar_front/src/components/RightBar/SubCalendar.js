@@ -50,7 +50,6 @@ function SubCalendar() {
           view="month"
           month={{
             dayNames: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
-            // visibleWeeksCount: 4,
           }}
           calendars={calendars}
           events={initialEvents}

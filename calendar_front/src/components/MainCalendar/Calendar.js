@@ -10,7 +10,7 @@ const DEFAULT_MONTH_OPTIONS = {
   workweek: false,
   narrowWeekend: false,
   startDayOfWeek: 0,
-  isAlways6Weeks: true,
+  isAlways6Weeks: false,
   visibleEventCount: 6,
 };
 
@@ -19,9 +19,17 @@ function TUICalendar() {
     const container = document.querySelector('.container');
     const calendar = new Calendar(container, {
       defaultView: 'month',
+      isReadOnly: false,
+      usageStatistics: false,
       useFormPopup: true,
       useDetailPopup: true,
       ...DEFAULT_MONTH_OPTIONS,
+      isAlways6Weeks: false,
+    });
+
+    calendar.setOptions({
+      useFormPopup: true,
+      useDetailPopup: true,
     });
 
     calendar.createEvents([
@@ -43,8 +51,8 @@ function TUICalendar() {
     <>
       <div>
         <today />
-        <button className="prevmonth_btn" />
-        <button className="nextmonth_btn" />
+        <button className="prevmonth_btn" text="<"></button>
+        <button className="nextmonth_btn">></button>
       </div>
       <div className="container" style={{ height: '100%' }}></div>
     </>

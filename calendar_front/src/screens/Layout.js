@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import LeftBar from '../components/LeftBar/LeftBar';
 import RightBar from '../components/RightBar/RightBar';
 import TUICalendar from '../components/MainCalendar/Calendar';
+import MyCalendar from '../components/MainCalendar/TuiCalendartest';
 
 const Container = styled.div`
   font-color: grey;
@@ -51,7 +52,8 @@ function Layout() {
         <MiddlePartWrap>
           <Header />
           <CalendarContainer>
-            <TUICalendar />
+            {/* <TUICalendar /> */}
+            <MyCalendar />
           </CalendarContainer>
         </MiddlePartWrap>
         <RightBar />
