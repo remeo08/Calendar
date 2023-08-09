@@ -1,7 +1,7 @@
 import { styled } from 'styled-components';
 
 const TeamListContainer = styled.div`
-  width: 17vw;
+  width: 15vw;
   background-color: rgb(255, 255, 255);
   z-index: 98;
   display: flex;
@@ -15,29 +15,29 @@ const TeamListHeader = styled.div`
   height: 5vh;
   border-bottom: 1px solid rgb(255, 240, 230);
   padding-top: 14px;
-  padding-left: 14px;
+  padding-left: 20px;
 `;
 const Ul = styled.ul``;
 const Li = styled.li`
-  padding: 8px 18px;
+  padding: 8px 20px;
   font-size: 12px;
 `;
-function TeamList({ id, team }) {
+
+function TeamList({ user, num }) {
   return (
-    <TeamListContainer key={id}>
-      <Wrapper>
-        <TeamListHeader>"team.teamname"</TeamListHeader>
+    <TeamListContainer>
+      <Wrapper key={user[num].id}>
+        <TeamListHeader>{user[num].teamname}</TeamListHeader>
         <div>
           <Ul>
-            <Li>"team.teamember : 륜아"</Li>
-            <Li>"team.teamember : 병용"</Li>
-            <Li>"team.teamember : 가림"</Li>
-            <Li>"team.teamember : 소진"</Li>
-            <Li>"team.teamember : 지윤"</Li>
+            {user[num].members.map((member, index) => (
+              <Li key={index}>{member}</Li>
+            ))}
           </Ul>
         </div>
       </Wrapper>
     </TeamListContainer>
   );
 }
+
 export default TeamList;
