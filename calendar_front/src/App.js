@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import routes from './routes';
 
 import Layout from './screens/Layout';
-import SignUp from './screens/SignUp';
+import SignUp from './screens/Signup';
 import Welcome from './screens/Welcome';
 import Login from './screens/Login';
 
@@ -11,7 +11,7 @@ import { Reset } from 'styled-reset';
 import Landing from './screens/Landing';
 
 function App() {
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
 
   return (
     <Router>
