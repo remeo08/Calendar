@@ -51,8 +51,7 @@ function Layout() {
         <MiddlePartWrap>
           <Header />
           <CalendarContainer>
-            {/* <TUICalendar /> */}
-            <MyCalendar />
+            <TUICalendar />
           </CalendarContainer>
         </MiddlePartWrap>
         <RightBar />
