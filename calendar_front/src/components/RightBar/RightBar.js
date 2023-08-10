@@ -1,5 +1,7 @@
 import { styled } from 'styled-components';
 import SubCalendar from './SubCalendar';
+import Comment from './Comments';
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -42,6 +44,7 @@ function RightBar() {
         <Status>
           default : Status
           <br /> if click event : EventDetail
+          <Comment />
         </Status>
       </Wrapper>
       {/* <Wrapper>
