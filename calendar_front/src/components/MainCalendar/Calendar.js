@@ -4,16 +4,6 @@ import '@toast-ui/calendar/dist/toastui-calendar.min.css';
 import 'tui-date-picker/dist/tui-date-picker.css';
 import 'tui-time-picker/dist/tui-time-picker.css';
 
-const DEFAULT_MONTH_OPTIONS = {
-  dayNames: ['일', '월', '화', '수', '목', '금', '토'],
-  visibleWeeksCount: 0,
-  workweek: false,
-  narrowWeekend: false,
-  startDayOfWeek: 0,
-  isAlways6Weeks: false,
-  visibleEventCount: 6,
-};
-
 function TUICalendar() {
   const calendars = [{ id: 'cal1', name: 'Personal' }];
   const initialEvents = [
@@ -75,6 +65,26 @@ function TUICalendar() {
     setCurrentView(view);
   };
 
+  const onBeforeCreateEvent = (eventData) => {
+    const event = {
+      calendarId: eventData.calendarId || '',
+      id: String(Math.random()),
+      title: eventData.title,
+      isAllday: eventData.isAllday,
+      start: eventData.start,
+      end: eventData.end,
+      category: eventData.isAllday ? 'allday' : 'time',
+      dueDateClass: '',
+      location: eventData.location,
+      state: eventData.state,
+      isPrivate: eventData.isPrivate,
+    };
+
+    console.log(event);
+
+    alert('일정 생성 완료');
+  };
+
   return (
     <div>
       <button onClick={() => changeView('month')}>month</button>
@@ -85,12 +95,25 @@ function TUICalendar() {
         view={currentView}
         month={{
           dayNames: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
-          // visibleWeeksCount: 4,
           isAlways6Weeks: false,
         }}
+        useFormPopup
+        useDetailPopup
         calendars={calendars}
         events={filteredEvents}
         onAfterRenderEvent={onAfterRenderEvent}
+        onBeforeCreateEvent={onBeforeCreateEvent}
+        template={{
+          popupStateBusy() {
+            return 'Done';
+          },
+          popupStateFree() {
+            return 'Todo';
+          },
+          locationPlaceholder() {
+            return '';
+          },
+        }}
       />
     </div>
   );
