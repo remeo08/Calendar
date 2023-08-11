@@ -1,31 +1,3 @@
-// import React, { useState } from 'react';
-// import CommentEdit from './CommentEdit';
-
-// function CommentList() {
-//   const [comments, setComments] = useState([]);
-
-//   const handleAddComment = (content) => {
-//     const newComment = {
-//       name: '사용자 이름',
-//       comment: content,
-//     };
-//     setComments([...comments, newComment]);
-//   };
-
-//   return (
-//     <div className="CommentList">
-//       <CommentEdit onAddComment={handleAddComment} />
-//       {comments.map((comment, index) => (
-//         <div key={index}>
-//           <strong>{comment.name}:</strong> {comment.comment}
-//         </div>
-//       ))}
-//     </div>
-//   );
-// }
-
-// export default CommentList;
-
 import React from 'react';
 import { styled } from 'styled-components';
 

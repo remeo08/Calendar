@@ -1,6 +1,5 @@
 import { styled } from 'styled-components';
-import { LuSettings, LuBell } from 'react-icons/lu';
-import { BiSearchAlt2 } from 'react-icons/bi';
+import { LuSettings, LuBell, LuSearch } from 'react-icons/lu';
 
 const HeaderContainer = styled.div`
   display: flex;

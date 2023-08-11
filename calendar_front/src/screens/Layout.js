@@ -35,7 +35,6 @@ const MiddlePartWrap = styled.div`
 const CalendarContainer = styled.div`
   border-top: 1px solid lightgrey;
   width: 99%;
-  height: 91%;
   overflow: auto;
   display: flex;
   flex-direction: column;
