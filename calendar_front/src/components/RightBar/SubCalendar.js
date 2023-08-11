@@ -4,11 +4,12 @@ import Calendar from '@toast-ui/react-calendar';
 import '@toast-ui/calendar/dist/toastui-calendar.min.css';
 
 const SubCalendarHeader = styled.div`
-  height: 5vh;
-  padding-left: 20px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-bottom: 1px solid lightgrey;
   color: grey;
-  margin-top: 13px;
 `;
 const SubCalendarBox = styled.div`
   overflow: auto;
@@ -49,7 +50,6 @@ function SubCalendar() {
           view="month"
           month={{
             dayNames: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
-            visibleWeeksCount: 4,
           }}
           calendars={calendars}
           events={initialEvents}

@@ -1,5 +1,9 @@
+import { useState } from 'react';
 import { styled } from 'styled-components';
 import SubCalendar from './SubCalendar';
+import CommentEdit from './CommentEdit';
+import CommentList from './CommentList';
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -24,6 +28,8 @@ const StatusHeader = styled.div`
   padding-top: 13px;
 `;
 const Status = styled.div`
+  width: 100%;
+  height: 100%;
   padding-top: 12px;
   color: grey;
   padding-left: 12px;
@@ -32,6 +38,15 @@ const Status = styled.div`
 const EventDetail = styled.div``;
 
 function RightBar() {
+  const [comments, setComments] = useState([]);
+
+  const addComment = (newComment) => {
+    setComments([...comments, newComment]);
+  };
+
+  const author = 'nickname';
+  const schedule = 1;
+
   return (
     <Container>
       <Wrapper>
@@ -40,8 +55,16 @@ function RightBar() {
       <Wrapper>
         <StatusHeader>Status</StatusHeader>
         <Status>
-          default : Status
-          <br /> if click event : EventDetail
+          <div>
+            {comments.map((comment, index) => (
+              <CommentList key={index} comment={comment} />
+            ))}
+          </div>
+          <CommentEdit
+            schedule={schedule}
+            author={author}
+            addComment={addComment}
+          />
         </Status>
       </Wrapper>
       {/* <Wrapper>
