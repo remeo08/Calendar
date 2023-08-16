@@ -1,0 +1,8 @@
+.overlay-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 290px;
+  height: 30px;
+  margin-bottom: 15px;
+}

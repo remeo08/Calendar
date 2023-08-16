@@ -1,5 +1,11 @@
+import { Link } from 'react-router-dom';
+
 function Landing() {
-  <div>Landing</div>;
+  return (
+    <div>
+      <Link to="/">로그인 / 회원가입</Link>
+    </div>
+  );
 }
 
 export default Landing;
