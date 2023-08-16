@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import routes from './routes';
 
+import { GlobalStyle } from './screens/LoginStyles';
 import Layout from './screens/Layout';
 import SignUp from './screens/Signup';
 import Welcome from './screens/Welcome';
@@ -16,6 +17,7 @@ function App() {
   return (
     <Router>
       <Reset />
+      <GlobalStyle />
       <Routes>
         <Route
           path={routes.layout}

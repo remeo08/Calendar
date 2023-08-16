@@ -126,8 +126,6 @@ const Login = () => {
               ></SocialIcon>
             </SocialLink>
           </SocialLinks>
-          {/* <span>or use your account</span> */}
-          {/* <label htmlFor="id">아이디</label> */}
           <Input
             className="id"
             type="text"
@@ -163,9 +161,9 @@ const Login = () => {
           {errors.password && (
             <small role="alert">{errors.password.message}</small>
           )}
-          <button type="submit" disabled={isSubmitting}>
+          <Button type="submit" disabled={isSubmitting}>
             로그인
-          </button>
+          </Button>
         </Form>
       </LoginContainer>
       <Signup></Signup>
