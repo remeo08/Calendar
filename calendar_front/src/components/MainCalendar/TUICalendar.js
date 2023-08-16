@@ -2,6 +2,8 @@ import Calendar from '@toast-ui/react-calendar';
 import '@toast-ui/calendar/dist/toastui-calendar.min.css';
 import 'tui-date-picker/dist/tui-date-picker.css';
 import 'tui-time-picker/dist/tui-time-picker.css';
+import { styled } from 'styled-components';
+import Header from '../Header';
 
 import { TZDate } from '@toast-ui/calendar';
 import { useCallback, useEffect, useRef, useState } from 'react';
@@ -31,6 +33,18 @@ const viewModeOptions = [
   },
 ];
 
+const CalendarContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 98%;
+`;
+const CalendarHeader = styled.div`
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+  height: 14vh;
+`;
 export default function TUICalendar({ view }) {
   const calendarRef = useRef(null);
   const [selectedDateRangeText, setSelectedDateRangeText] = useState('');
@@ -239,17 +253,30 @@ export default function TUICalendar({ view }) {
   };
 
   return (
-    <div>
-      <h1>🍞📅 TOAST UI Calendar + React.js</h1>
-      <div>
-        <select onChange={onChangeSelect} value={selectedView}>
-          {viewModeOptions.map((option, index) => (
-            <option value={option.value} key={index}>
-              {option.title}
-            </option>
-          ))}
-        </select>
-        <span>
+    <CalendarContainer>
+      <Header />{' '}
+      <CalendarHeader>
+        <div>
+          <span>
+            <button
+              type="button"
+              className="btn btn-default btn-sm move-day"
+              data-action="move-prev"
+              onClick={onClickNavi}
+            >
+              Prev
+            </button>
+            <span className="render-range">{selectedDateRangeText}</span>
+
+            <button
+              type="button"
+              className="btn btn-default btn-sm move-day"
+              data-action="move-next"
+              onClick={onClickNavi}
+            >
+              Next
+            </button>
+          </span>
           <button
             type="button"
             className="btn btn-default btn-sm move-today"
@@ -258,27 +285,17 @@ export default function TUICalendar({ view }) {
           >
             Today
           </button>
-          <button
-            type="button"
-            className="btn btn-default btn-sm move-day"
-            data-action="move-prev"
-            onClick={onClickNavi}
-          >
-            Prev
-          </button>
-          <button
-            type="button"
-            className="btn btn-default btn-sm move-day"
-            data-action="move-next"
-            onClick={onClickNavi}
-          >
-            Next
-          </button>
-        </span>
-        <span className="render-range">{selectedDateRangeText}</span>
-      </div>
+          <select onChange={onChangeSelect} value={selectedView}>
+            {viewModeOptions.map((option, index) => (
+              <option value={option.value} key={index}>
+                {option.title}
+              </option>
+            ))}
+          </select>
+        </div>
+      </CalendarHeader>
       <Calendar
-        height="900px"
+        height="67vh"
         calendars={initialCalendars}
         month={{ startDayOfWeek: 1 }}
         events={initialEvents}
@@ -320,6 +337,6 @@ export default function TUICalendar({ view }) {
         onBeforeUpdateEvent={onBeforeUpdateEvent}
         onBeforeCreateEvent={onBeforeCreateEvent}
       />
-    </div>
+    </CalendarContainer>
   );
 }

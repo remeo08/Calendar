@@ -1,6 +1,5 @@
 import { styled } from 'styled-components';
 
-import Header from '../components/Header';
 import LeftBar from '../components/LeftBar/LeftBar';
 import RightBar from '../components/RightBar/RightBar';
 import TUICalendar from '../components/MainCalendar/TUICalendar';
@@ -24,7 +23,7 @@ const Wrapper = styled.div`
 `;
 
 const MiddlePartWrap = styled.div`
-  width: 68vw;
+  width: 90vw;
   height: 90vh;
   display: flex;
   flex-direction: column;
@@ -39,7 +38,6 @@ function Layout() {
       <Wrapper>
         <LeftBar />
         <MiddlePartWrap>
-          <Header />
           <TUICalendar />
         </MiddlePartWrap>
         <RightBar />
