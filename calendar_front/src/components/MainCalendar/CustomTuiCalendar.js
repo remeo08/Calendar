@@ -16,7 +16,7 @@ import './styles.css';
 const CustomTuiCalendar = forwardRef(
   (
     {
-      height = '800px',
+      height = '10px',
       defaultView = 'week',
       calendars = [],
       schedules = [],
@@ -638,7 +638,7 @@ const CustomTuiCalendar = forwardRef(
                 })}
               </div>
             </div>
-            <div className="lnb-footer">© NHN Corp.</div>
+            {/* <div className="lnb-footer">© NHN Corp.</div> */}
           </div>
         )}
 
@@ -712,7 +712,7 @@ const CustomTuiCalendar = forwardRef(
                       onClick={(e) => {
                         e.preventDefault();
                         calendarInstRef.current.setOptions(
-                          { month: { visibleWeeksCount: 6 } },
+                          { month: { isAlways6Weeks: false } },
                           true,
                         ); // or null
                         calendarInstRef.current.changeView('month', true);

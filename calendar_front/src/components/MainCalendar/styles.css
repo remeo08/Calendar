@@ -1,3 +1,8 @@
+.TUICalendar {
+  font-family: sans-serif;
+  text-align: center;
+}
+
 .tui-full-calendar-section-start-date {
   width: 276px;
 }
@@ -1021,9 +1026,9 @@ body {
 }
 #right {
   position: absolute;
-  left: 200px;
-  top: 0px;
+  top: 0;
   right: 0;
+  left: 0;
   bottom: 0;
 }
 #lnb label {

@@ -11,10 +11,11 @@ const Container = styled.div`
   align-items: center;
   height: 100vh;
 `;
+
 const Wrapper = styled.div`
   display: flex;
   margin: 0 auto;
-  max-width: 80vw;
+  max-width: 90vw;
   width: 100%;
   border-radius: 10px;
   -webkit-box-shadow:
@@ -24,7 +25,7 @@ const Wrapper = styled.div`
 
 const MiddlePartWrap = styled.div`
   width: 68vw;
-  height: 86vh;
+  height: 90vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -32,25 +33,23 @@ const MiddlePartWrap = styled.div`
   border-left: 1px solid rgb(235, 237, 239);
 `;
 
-const CalendarContainer = styled.div`
-  border-top: 1px solid lightgrey;
-  width: 99%;
-  overflow: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: end;
-`;
+// const CalendarContainer = styled.div`
+//   border-top: 1px solid lightgrey;
+//   width: 100%;
+//   overflow: auto;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: end;
+// `;
 
 function Layout() {
   return (
     <Container>
       <Wrapper>
-        <LeftBar></LeftBar>
+        <LeftBar />
         <MiddlePartWrap>
           <Header />
-          <CalendarContainer>
-            <TUICalendar />
-          </CalendarContainer>
+          <TUICalendar />
         </MiddlePartWrap>
         <RightBar />
       </Wrapper>
