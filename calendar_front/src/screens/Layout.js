@@ -3,7 +3,7 @@ import { styled } from 'styled-components';
 import Header from '../components/Header';
 import LeftBar from '../components/LeftBar/LeftBar';
 import RightBar from '../components/RightBar/RightBar';
-import TUICalendar from '../components/MainCalendar/Calendar';
+import TUICalendar from '../components/MainCalendar/TUICalendar';
 
 const Container = styled.div`
   font-color: grey;
@@ -32,15 +32,6 @@ const MiddlePartWrap = styled.div`
   border-right: 1px solid rgb(235, 237, 239);
   border-left: 1px solid rgb(235, 237, 239);
 `;
-
-// const CalendarContainer = styled.div`
-//   border-top: 1px solid lightgrey;
-//   width: 100%;
-//   overflow: auto;
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: end;
-// `;
 
 function Layout() {
   return (
