@@ -1,86 +1,86 @@
 import { useForm } from 'react-hook-form';
-import { styled } from 'styled-components';
+import styles from './styles/Login.module.css';
 import Signup from './Signup';
 import axios from 'axios';
 
-const Container = styled.div`
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #ebecf0;
-  overflow: hidden;
-`;
+// const Container = styled.div`
+//   width: 100%;
+//   height: 100vh;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   background: #ebecf0;
+//   overflow: hidden;
+// `;
 
-const LoginContainer = styled.div`
-  border-radius: 10px;
-  box-shadow:
-    -5px -5px 10px #fff,
-    5px 5px 10px #babebc;
-  position: absolute;
-  width: 768px;
-  min-height: 480px;
-  overflow: hidden;
-`;
+// const LoginContainer = styled.div`
+//   border-radius: 10px;
+//   box-shadow:
+//     -5px -5px 10px #fff,
+//     5px 5px 10px #babebc;
+//   position: absolute;
+//   width: 768px;
+//   min-height: 480px;
+//   overflow: hidden;
+// `;
 
-const Form = styled.div`
-  background: #ebecf0;
-  display: flex;
-  flex-direction: column;
-  padding: 0 50px;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
-`;
+// const Form = styled.div`
+//   background: #ebecf0;
+//   display: flex;
+//   flex-direction: column;
+//   padding: 0 50px;
+//   height: 100%;
+//   justify-content: center;
+//   align-items: center;
+// `;
 
-const Input = styled.input`
-background: #eee;
-padding: 16px;
-margin: 8px 0;
-width: 85%;
-border: 0;
-outline: none;
-border-radius: 20px;
-box-shadow: inset 7px 2px 10px #babebc, inset -5px -5px 12px #fff;
-  }
-`;
+// const Input = styled.input`
+// background: #eee;
+// padding: 16px;
+// margin: 8px 0;
+// width: 85%;
+// border: 0;
+// outline: none;
+// border-radius: 20px;
+// box-shadow: inset 7px 2px 10px #babebc, inset -5px -5px 12px #fff;
+//   }
+// `;
 
-const Button = styled.button`
-  border-radius: 20px;
-  border: none;
-  outline: none;
-  font-size: 12px;
-  font-weight: bold;
-  padding: 15px 45px;
-  margin: 14px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: transform 80ms ease-in;
-`;
+// const Button = styled.button`
+//   border-radius: 20px;
+//   border: none;
+//   outline: none;
+//   font-size: 12px;
+//   font-weight: bold;
+//   padding: 15px 45px;
+//   margin: 14px;
+//   letter-spacing: 1px;
+//   text-transform: uppercase;
+//   cursor: pointer;
+//   transition: transform 80ms ease-in;
+// `;
 
-const SocialLinks = styled.div`
-  margin: 20px 0;
-`;
+// const SocialLinks = styled.div`
+//   margin: 20px 0;
+// `;
 
-const SocialLink = styled.div`
-  width: 40px;
-  height: 40px;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 5px;
-  border-radius: 50%;
-  box-shadow:
-    -5px -5px 10px #fff,
-    5px 5px 8px #babebc;
-  cursor: pointer;
-`;
+// const SocialLink = styled.div`
+//   width: 40px;
+//   height: 40px;
+//   display: inline-flex;
+//   justify-content: center;
+//   align-items: center;
+//   margin: 0 5px;
+//   border-radius: 50%;
+//   box-shadow:
+//     -5px -5px 10px #fff,
+//     5px 5px 8px #babebc;
+//   cursor: pointer;
+// `;
 
-const SocialIcon = styled.i`
-  color: #000;
-`;
+// const SocialIcon = styled.i`
+//   color: #000;
+// `;
 
 const Login = () => {
   const onSubmit = async (data) => {
@@ -102,6 +102,9 @@ const Login = () => {
   } = useForm();
 
   return (
+    // <div>
+    //   <p className={styles.text}>ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</p>
+    // </div>
     <Container>
       <LoginContainer>
         <Form onSubmit={handleSubmit(onSubmit)}>
