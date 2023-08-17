@@ -12,6 +12,7 @@ const Container = styled.div`
   background-color: rgb(255, 255, 255);
   border-radius: 0 14px 14px 0;
 `;
+
 const Wrapper = styled.div`
   width: 99%;
   height: 41%;
@@ -27,6 +28,7 @@ const StatusHeader = styled.div`
   color: grey;
   padding-top: 13px;
 `;
+
 const Status = styled.div`
   width: 100%;
   height: 100%;
@@ -35,6 +37,7 @@ const Status = styled.div`
   padding-left: 12px;
   font-size: 14px;
 `;
+
 const EventDetail = styled.div``;
 
 function RightBar() {
