@@ -11,11 +11,13 @@ const SubCalendarHeader = styled.div`
   border-bottom: 1px solid rgb(235, 237, 239);
   color: grey;
 `;
+
 const SubCalendarBox = styled.div`
   overflow: auto;
   width: 100%;
   height: 100%;
 `;
+
 function SubCalendar() {
   const calendars = [{ id: 'cal1', name: 'Personal' }];
   const initialEvents = [
@@ -50,6 +52,7 @@ function SubCalendar() {
           view="month"
           month={{
             dayNames: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
+            isAlways6Weeks: false,
           }}
           calendars={calendars}
           events={initialEvents}

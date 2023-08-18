@@ -1,4 +1,7 @@
+import React, { useState } from 'react';
 import { styled } from 'styled-components';
+import { RecoilRoot, useRecoilState } from 'recoil';
+import { eventState } from '../recoilState';
 
 import LeftBar from '../components/LeftBar/LeftBar';
 import RightBar from '../components/RightBar/RightBar';
@@ -33,16 +36,26 @@ const MiddlePartWrap = styled.div`
 `;
 
 function Layout() {
+  const [events, setEvents] = useRecoilState(eventState); // Use the Recoil state
+  const [selectedEvent, setSelectedEvent] = useState(null);
+
   return (
-    <Container>
-      <Wrapper>
-        <LeftBar />
-        <MiddlePartWrap>
-          <TUICalendar />
-        </MiddlePartWrap>
-        <RightBar />
-      </Wrapper>
-    </Container>
+    <RecoilRoot>
+      <Container>
+        <Wrapper>
+          <LeftBar />
+          <MiddlePartWrap>
+            <TUICalendar
+              events={events}
+              setEvents={setEvents}
+              view="month"
+              setSelectedEvent={setSelectedEvent}
+            />
+          </MiddlePartWrap>
+          <RightBar selectedEvent={selectedEvent} />
+        </Wrapper>
+      </Container>
+    </RecoilRoot>
   );
 }
 

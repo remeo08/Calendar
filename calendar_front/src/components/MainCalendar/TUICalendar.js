@@ -1,22 +1,15 @@
-import Calendar from '@toast-ui/react-calendar';
-import '@toast-ui/calendar/dist/toastui-calendar.min.css';
-import 'tui-date-picker/dist/tui-date-picker.css';
-import 'tui-time-picker/dist/tui-time-picker.css';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { styled } from 'styled-components';
 import Header from '../Header';
 
+import Calendar from '@toast-ui/react-calendar';
 import { TZDate } from '@toast-ui/calendar';
-import { useCallback, useEffect, useRef, useState } from 'react';
-
-// import Calendar from "../src";
+import '@toast-ui/calendar/dist/toastui-calendar.min.css';
+import 'tui-date-picker/dist/tui-date-picker.css';
+import 'tui-time-picker/dist/tui-time-picker.css';
 import { theme } from './theme';
 import { addDate, addHours, subtractDate } from './utils';
 
-// const calendarOption = {
-//   view: "month",
-//   useFormPopup: true,
-//   useDetailPopup: true,
-// };
 const today = new TZDate();
 const viewModeOptions = [
   {
@@ -38,6 +31,7 @@ const CalendarContainer = styled.div`
   flex-direction: column;
   width: 98%;
 `;
+
 const CalendarHeader = styled.div`
   display: flex;
   align-items: center;
@@ -45,10 +39,18 @@ const CalendarHeader = styled.div`
   width: 100%;
   height: 14vh;
 `;
-export default function TUICalendar({ view }) {
+
+export default function TUICalendar({
+  view,
+  events,
+  setEvents,
+  setSelectedEvent,
+}) {
   const calendarRef = useRef(null);
   const [selectedDateRangeText, setSelectedDateRangeText] = useState('');
   const [selectedView, setSelectedView] = useState(view);
+  const [eventCounter, setEventCounter] = useState(1);
+
   const initialCalendars = [
     {
       id: '0',
@@ -203,6 +205,8 @@ export default function TUICalendar({ view }) {
     console.log('MouseEvent : ', res.nativeEvent);
     console.log('Event Info : ', res.event);
     console.groupEnd();
+
+    setSelectedEvent(res.event);
   };
 
   const onClickTimezonesCollapseBtn = (timezoneCollapsed) => {
@@ -220,8 +224,22 @@ export default function TUICalendar({ view }) {
 
   const onBeforeUpdateEvent = (updateData) => {
     console.group('onBeforeUpdateEvent');
-    console.log(updateData);
+    console.log('Event Info: ', updateData);
     console.groupEnd();
+
+    // 서버에 보낼 이벤트 데이터 준비
+    // const eventForUpdate = {
+    //   id: eventData.id,
+    //   team: eventData.calendarId,
+    //   title: eventData.title,
+    //   description: eventData.location,
+    //   start_date: eventData.start,
+    //   end_date: eventData.end,
+    //   state: eventData.state,
+    // };
+
+    // 업데이트 API 호출 예
+    // axios.put(`url/${eventData.id}`, eventForUpdate);
 
     const targetEvent = updateData.event;
     const changes = { ...updateData.changes };
@@ -231,13 +249,23 @@ export default function TUICalendar({ view }) {
       targetEvent.calendarId,
       changes,
     );
+    getCalInstance().render();
   };
 
   const onBeforeCreateEvent = (eventData) => {
-    console.log(eventData);
+    console.log('dididi', eventData);
+    // const eventForBack = {
+    //   team: eventData.calendarId,
+    //   title: eventData.title,
+    //   description: eventData.location,
+    //   start_date: eventData.start,
+    //   end_date: eventData.end,
+    //   state: eventData.state,
+    // };
+    // axios.post('url', eventForBack);
     const event = {
       calendarId: eventData.calendarId || '',
-      id: String(Math.random()),
+      id: String(eventCounter), //back에서 받아온 id로 변경하기
       title: eventData.title,
       isAllday: eventData.isAllday,
       start: eventData.start,
@@ -249,7 +277,11 @@ export default function TUICalendar({ view }) {
       isPrivate: eventData.isPrivate,
     };
 
+    setEventCounter(eventCounter + 1);
     getCalInstance().createEvents([event]);
+
+    setEvents([...events, event]);
+    setSelectedEvent(event);
   };
 
   return (
@@ -297,14 +329,41 @@ export default function TUICalendar({ view }) {
       <Calendar
         height="67vh"
         calendars={initialCalendars}
-        month={{ startDayOfWeek: 1 }}
+        month={{
+          startDayOfWeek: 0,
+          isAlways6Weeks: false,
+        }}
         events={initialEvents}
         template={{
-          milestone(event) {
-            return `<span style="color: #fff; background-color: ${event.backgroundColor};">${event.title}</span>`;
-          },
           allday(event) {
             return `[All day] ${event.title}`;
+          },
+          popupIsAllday() {
+            return '하루 종일';
+          },
+          popupSave() {
+            return '저장';
+          },
+          titlePlaceholder() {
+            return '제목';
+          },
+          popupStateFree() {
+            return 'Done';
+          },
+          popupStateBusy() {
+            return 'Todo';
+          },
+          locationPlaceholder() {
+            return '세부 내용';
+          },
+          popupEdit() {
+            return '편집';
+          },
+          popupDelete() {
+            return '삭제';
+          },
+          popupUpdate() {
+            return '저장';
           },
         }}
         theme={theme}

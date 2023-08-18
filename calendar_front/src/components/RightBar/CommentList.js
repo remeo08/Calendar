@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { styled } from 'styled-components';
+import CommentEdit from './CommentEdit';
 
 const CommentItem = styled.div`
   padding: 7px;
