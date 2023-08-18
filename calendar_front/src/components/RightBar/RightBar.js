@@ -6,30 +6,30 @@ import CommentList from './CommentList';
 import Status from './Status';
 
 const Container = styled.div`
+  height: 90vh;
+  border-radius: 0px 40px 40px 0px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 20vw;
-  background-color: rgb(255, 255, 255);
-  border-radius: 0 14px 14px 0;
+  border-left: 1px solid rgb(235, 237, 239);
 `;
-
 const Wrapper = styled.div`
-  width: 99%;
-  height: 41%;
+  width: 100%;
+  height: 48%;
+  display: flex;
+  flex-direction: column;
   border-radius: 10px;
 `;
 
 const StatusHeader = styled.div`
-  height: 5vh;
-  padding-left: 20px;
-
+  height: 22px;
+  border-top: 1px solid rgb(235, 237, 239);
   border-bottom: 1px solid rgb(235, 237, 239);
-  border-top: 1px solid lightgrey;
   color: grey;
-  padding-top: 13px;
+  text-align: center;
+  font-size: 22px;
+  padding: 4px;
 `;
-
 const CommentContainer = styled.div`
   width: 100%;
   height: 100%;

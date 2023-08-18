@@ -1,6 +1,8 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { styled } from 'styled-components';
+
 import Header from '../Header';
+import SearchInfo from './SearchInfo';
 
 import Calendar from '@toast-ui/react-calendar';
 import { TZDate } from '@toast-ui/calendar';
@@ -27,18 +29,151 @@ const viewModeOptions = [
 ];
 
 const CalendarContainer = styled.div`
+  width: 70vw;
+  display: flex;
+  height: 90vh;
+`;
+const ShowMenuBar = styled.div`
   display: flex;
   flex-direction: column;
-  width: 98%;
+  border-right: 1px solid rgb(235, 237, 239);
+  width: 18%;
+  border-radius: 40px 0 0 40px;
+`;
+const ShowMenuBarHeader = styled.div`
+  height: 28px;
+  border-bottom: 1px solid rgb(235, 237, 239);
+  font-size: 22px;
+  color: grey;
+  text-align: center;
+  padding-top: 8px;
+  margin-bottom: 22px;
 `;
 
+const TeamList = styled.label`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 6px;
+`;
+const Input = styled.input`
+  opacity: 1;
+  -webkit-appearance: none;
+  cursor: pointer;
+  height: 25px;
+  width: 25px;
+  box-shadow:
+    -10px -10px 10px rgba(255, 255, 255, 0.8),
+    10px 10px 10px rgba(0, 0, 70, 0.18);
+  border-radius: 50%;
+  border: 2px solid rgb(235, 237, 239);
+  outline: none;
+
+  transition: 0.5s;
+  &:checked {
+    box-shadow:
+      -10px -10px 10px rgba(255, 255, 255, 0.2),
+      10px 10px 10px rgba(70, 70, 70, 0.12),
+      inset -10px -10px 10px rgba(255, 255, 255, 0.6),
+      inset 10px 10px 10px rgba(70, 70, 70, 0.12);
+    transition: 0.5s;
+    background-color: ${(props) => props.bgColor};
+  }
+`;
+const MIDContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`;
+const CalendarBox = styled.div`
+  width: 100%;
+  height: 76vh;
+  margin-left: 3%;
+`;
 const CalendarHeader = styled.div`
   display: flex;
   align-items: center;
-
-  width: 100%;
-  height: 14vh;
+  justify-content: center;
+  height: 10%;
+  font-size: 30px;
+  color: darkgrey;
 `;
+
+const initialCalendars = [
+  {
+    id: '0',
+    name: 'team1',
+    backgroundColor: '#9e5fff',
+    borderColor: '#9e5fff',
+    dragBackgroundColor: '#9e5fff',
+  },
+  {
+    id: '1',
+    name: 'team2',
+    backgroundColor: '#00a9ff',
+    borderColor: '#00a9ff',
+    dragBackgroundColor: '#00a9ff',
+  },
+  {
+    id: '2',
+    name: 'team3',
+    backgroundColor: '#e678f5',
+    borderColor: '#e678f5',
+    dragBackgroundColor: '#e678f5',
+  },
+  {
+    id: '3',
+    name: 'team4',
+    backgroundColor: '#f5a078',
+    borderColor: '#f5a0785',
+    dragBackgroundColor: '#f5a078',
+  },
+  {
+    id: '4',
+    name: 'team5',
+    backgroundColor: '#f5e478',
+    borderColor: '#f5e478',
+    dragBackgroundColor: '#f5e478',
+  },
+];
+const initialEvents = [
+  {
+    id: '1',
+    calendarId: '0',
+    title: 'TOAST UI Calendar Study',
+    category: 'time',
+    start: today,
+    end: addHours(today, 3),
+  },
+  {
+    id: '2',
+    calendarId: '1',
+    title: 'Practice',
+    category: 'milestone',
+    start: addDate(today, 1),
+    end: addDate(today, 1),
+    isReadOnly: true,
+  },
+  {
+    id: '3',
+    calendarId: '2',
+    title: 'FE Workshop',
+    category: 'allday',
+    start: subtractDate(today, 2),
+    end: subtractDate(today, 1),
+    isReadOnly: true,
+  },
+  {
+    id: '4',
+    calendarId: '3',
+    title: 'Report',
+    category: 'time',
+    start: today,
+    end: addHours(today, 1),
+  },
+];
 
 export default function TUICalendar({
   view,
@@ -46,66 +181,23 @@ export default function TUICalendar({
   setEvents,
   setSelectedEvent,
 }) {
+  const [selectedCalendars, setSelectedCalendars] = useState(
+    initialCalendars.map((calendar) => ({
+      ...calendar,
+      isChecked: true, // 선택 상태를 초기화합니다.
+    })),
+  );
+  const filteredEvents = initialEvents.filter(
+    (event) =>
+      selectedCalendars.find((calendar) => calendar.id === event.calendarId)
+        ?.isChecked,
+  );
+
   const calendarRef = useRef(null);
   const [selectedDateRangeText, setSelectedDateRangeText] = useState('');
   const [selectedView, setSelectedView] = useState(view);
-  const [eventCounter, setEventCounter] = useState(1);
+  const [eventCounter, setEventCounter] = useState(5);
 
-  const initialCalendars = [
-    {
-      id: '0',
-      name: 'Private',
-      backgroundColor: '#9e5fff',
-      borderColor: '#9e5fff',
-      dragBackgroundColor: '#9e5fff',
-    },
-    {
-      id: '1',
-      name: 'Company',
-      backgroundColor: '#00a9ff',
-      borderColor: '#00a9ff',
-      dragBackgroundColor: '#00a9ff',
-    },
-  ];
-  const initialEvents = [
-    {
-      id: '1',
-      calendarId: '0',
-      title: 'TOAST UI Calendar Study',
-      category: 'time',
-      start: today,
-      end: addHours(today, 3),
-    },
-    {
-      id: '2',
-      calendarId: '0',
-      title: 'Practice',
-      category: 'milestone',
-      start: addDate(today, 1),
-      end: addDate(today, 1),
-      isReadOnly: true,
-    },
-    {
-      id: '3',
-      calendarId: '0',
-      title: 'FE Workshop',
-      category: 'allday',
-      start: subtractDate(today, 2),
-      end: subtractDate(today, 1),
-      isReadOnly: true,
-    },
-    {
-      id: '4',
-      calendarId: '0',
-      title: 'Report',
-      category: 'time',
-      start: today,
-      end: addHours(today, 1),
-    },
-  ];
-
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
   const getCalInstance = useCallback(
     () => calendarRef.current?.getInstance?.(),
     [],
@@ -286,116 +378,142 @@ export default function TUICalendar({
 
   return (
     <CalendarContainer>
-      <Header />{' '}
-      <CalendarHeader>
-        <div>
-          <span>
-            <button
-              type="button"
-              className="btn btn-default btn-sm move-day"
-              data-action="move-prev"
-              onClick={onClickNavi}
-            >
-              Prev
-            </button>
-            <span className="render-range">{selectedDateRangeText}</span>
+      <ShowMenuBar>
+        <ShowMenuBarHeader>Header</ShowMenuBarHeader>
+        {selectedCalendars.map((calendar) => (
+          <TeamList key={calendar.id}>
+            <Input
+              type="checkbox"
+              checked={calendar.isChecked}
+              bgColor={calendar.backgroundColor} //
+              onChange={() => {
+                const updatedCalendars = selectedCalendars.map((item) =>
+                  item.id === calendar.id
+                    ? { ...item, isChecked: !item.isChecked }
+                    : item,
+                );
+                setSelectedCalendars(updatedCalendars);
+              }}
+            />
+            {calendar.name}
+          </TeamList>
+        ))}
+      </ShowMenuBar>
+      <MIDContainer>
+        <Header />
+        <CalendarBox>
+          <CalendarHeader>
+            <div>
+              <span>
+                <button
+                  type="button"
+                  className="btn btn-default btn-sm move-day"
+                  data-action="move-prev"
+                  onClick={onClickNavi}
+                >
+                  Prev
+                </button>
+                <span className="render-range">{selectedDateRangeText}</span>
 
-            <button
-              type="button"
-              className="btn btn-default btn-sm move-day"
-              data-action="move-next"
-              onClick={onClickNavi}
-            >
-              Next
-            </button>
-          </span>
-          <button
-            type="button"
-            className="btn btn-default btn-sm move-today"
-            data-action="move-today"
-            onClick={onClickNavi}
-          >
-            Today
-          </button>
-          <select onChange={onChangeSelect} value={selectedView}>
-            {viewModeOptions.map((option, index) => (
-              <option value={option.value} key={index}>
-                {option.title}
-              </option>
-            ))}
-          </select>
-        </div>
-      </CalendarHeader>
-      <Calendar
-        height="67vh"
-        calendars={initialCalendars}
-        month={{
-          startDayOfWeek: 0,
-          isAlways6Weeks: false,
-        }}
-        events={initialEvents}
-        template={{
-          allday(event) {
-            return `[All day] ${event.title}`;
-          },
-          popupIsAllday() {
-            return '하루 종일';
-          },
-          popupSave() {
-            return '저장';
-          },
-          titlePlaceholder() {
-            return '제목';
-          },
-          popupStateFree() {
-            return 'Done';
-          },
-          popupStateBusy() {
-            return 'Todo';
-          },
-          locationPlaceholder() {
-            return '세부 내용';
-          },
-          popupEdit() {
-            return '편집';
-          },
-          popupDelete() {
-            return '삭제';
-          },
-          popupUpdate() {
-            return '저장';
-          },
-        }}
-        theme={theme}
-        timezone={{
-          zones: [
-            {
-              timezoneName: 'Asia/Seoul',
-              displayLabel: 'Seoul',
-              tooltip: 'UTC+09:00',
-            },
-          ],
-        }}
-        useDetailPopup={true}
-        useFormPopup={true}
-        view={selectedView}
-        week={{
-          showTimezoneCollapseButton: true,
-          timezonesCollapsed: false,
-          eventView: true,
-          taskView: true,
-        }}
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        ref={calendarRef}
-        onAfterRenderEvent={onAfterRenderEvent}
-        onBeforeDeleteEvent={onBeforeDeleteEvent}
-        onClickDayname={onClickDayName}
-        onClickEvent={onClickEvent}
-        onClickTimezonesCollapseBtn={onClickTimezonesCollapseBtn}
-        onBeforeUpdateEvent={onBeforeUpdateEvent}
-        onBeforeCreateEvent={onBeforeCreateEvent}
-      />
+                <button
+                  type="button"
+                  className="btn btn-default btn-sm move-day"
+                  data-action="move-next"
+                  onClick={onClickNavi}
+                >
+                  Next
+                </button>
+              </span>
+              <button
+                type="button"
+                className="btn btn-default btn-sm move-today"
+                data-action="move-today"
+                onClick={onClickNavi}
+              >
+                Today
+              </button>
+              <select onChange={onChangeSelect} value={selectedView}>
+                {viewModeOptions.map((option, index) => (
+                  <option value={option.value} key={index}>
+                    {option.title}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </CalendarHeader>
+          <Calendar
+            height="77vh"
+            calendars={selectedCalendars}
+            month={{
+              startDayOfWeek: 0,
+              isAlways6Weeks: false,
+            }}
+            events={filteredEvents}
+            template={{
+              allday(event) {
+                return `[All day] ${event.title}`;
+              },
+              popupIsAllday() {
+                return '하루 종일';
+              },
+              popupSave() {
+                return '저장';
+              },
+              titlePlaceholder() {
+                return '제목';
+              },
+              popupStateFree() {
+                return 'Done';
+              },
+              popupStateBusy() {
+                return 'Todo';
+              },
+              locationPlaceholder() {
+                return '세부 내용';
+              },
+              popupEdit() {
+                return '편집';
+              },
+              popupDelete() {
+                return '삭제';
+              },
+              popupUpdate() {
+                return '저장';
+              },
+            }}
+            theme={theme}
+            timezone={{
+              zones: [
+                {
+                  timezoneName: 'Asia/Seoul',
+                  displayLabel: 'Seoul',
+                  tooltip: 'UTC+09:00',
+                },
+              ],
+            }}
+            useDetailPopup={true}
+            useFormPopup={true}
+            view={selectedView}
+            week={{
+              showTimezoneCollapseButton: true,
+              timezonesCollapsed: false,
+              eventView: true,
+              taskView: true,
+            }}
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            ref={calendarRef}
+            onAfterRenderEvent={onAfterRenderEvent}
+            onBeforeDeleteEvent={onBeforeDeleteEvent}
+            onClickDayname={onClickDayName}
+            onClickEvent={onClickEvent}
+            onClickTimezonesCollapseBtn={onClickTimezonesCollapseBtn}
+            onBeforeUpdateEvent={onBeforeUpdateEvent}
+            onBeforeCreateEvent={onBeforeCreateEvent}
+          />{' '}
+        </CalendarBox>
+      </MIDContainer>
+      {/* <SearchInfo /> */}
     </CalendarContainer>
   );
 }
