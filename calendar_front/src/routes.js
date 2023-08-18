@@ -1,9 +1,10 @@
 const routes = {
   layout: '/',
-  signup: '/signup',
   welcome: '/welcome',
   mypage: '/mypage/:username',
   landing: '/landing',
+  signup: '/signup',
+  login: '/login',
 };
 
 export default routes;
