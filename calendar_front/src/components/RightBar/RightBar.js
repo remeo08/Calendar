@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { styled } from 'styled-components';
 import SubCalendar from './SubCalendar';
 import CommentEdit from './CommentEdit';
 import CommentList from './CommentList';
+import Status from './Status';
 
 const Container = styled.div`
   display: flex;
@@ -12,6 +13,7 @@ const Container = styled.div`
   background-color: rgb(255, 255, 255);
   border-radius: 0 14px 14px 0;
 `;
+
 const Wrapper = styled.div`
   width: 99%;
   height: 41%;
@@ -27,7 +29,8 @@ const StatusHeader = styled.div`
   color: grey;
   padding-top: 13px;
 `;
-const Status = styled.div`
+
+const CommentContainer = styled.div`
   width: 100%;
   height: 100%;
   padding-top: 12px;
@@ -35,9 +38,8 @@ const Status = styled.div`
   padding-left: 12px;
   font-size: 14px;
 `;
-const EventDetail = styled.div``;
 
-function RightBar() {
+function RightBar({ selectedEvent }) {
   const [comments, setComments] = useState([]);
 
   const addComment = (newComment) => {
@@ -54,7 +56,8 @@ function RightBar() {
       </Wrapper>
       <Wrapper>
         <StatusHeader>Status</StatusHeader>
-        <Status>
+        <Status selectedEvent={selectedEvent} />
+        <CommentContainer>
           <div>
             {comments.map((comment, index) => (
               <CommentList key={index} comment={comment} />
@@ -65,11 +68,8 @@ function RightBar() {
             author={author}
             addComment={addComment}
           />
-        </Status>
+        </CommentContainer>
       </Wrapper>
-      {/* <Wrapper>
-        <EventDetail></EventDetail>
-      </Wrapper> */}
     </Container>
   );
 }
