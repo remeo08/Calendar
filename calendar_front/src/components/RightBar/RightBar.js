@@ -6,8 +6,7 @@ import CommentList from './CommentList';
 import Status from './Status';
 
 const Container = styled.div`
-  height: 90vh;
-  border-radius: 0px 40px 40px 0px;
+  width: 15vw;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -15,16 +14,13 @@ const Container = styled.div`
 `;
 const Wrapper = styled.div`
   width: 100%;
-  height: 48%;
   display: flex;
   flex-direction: column;
   border-radius: 10px;
 `;
 
 const StatusHeader = styled.div`
-  height: 22px;
-  border-top: 1px solid rgb(235, 237, 239);
-  border-bottom: 1px solid rgb(235, 237, 239);
+  height: 20px;
   color: grey;
   text-align: center;
   font-size: 22px;
