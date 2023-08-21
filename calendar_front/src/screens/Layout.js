@@ -13,6 +13,7 @@ const Container = styled.div`
   justify-content: center;
   background-color: rgb(242, 242, 242);
 `;
+
 const Wrapper = styled.div`
   display: flex;
   width: 90vw;
@@ -25,11 +26,13 @@ const Wrapper = styled.div`
     -6px -6px 8px #ffffff;
   margin-bottom: 0.5%;
 `;
+
 const CalendarWrapper = styled.div`
   width: 100%;
 `;
+
 function Layout() {
-  const [events, setEvents] = useRecoilState(eventState); // Use the Recoil state
+  const [events, setEvents] = useRecoilState(eventState);
   const [selectedEvent, setSelectedEvent] = useState(null);
 
   return (
