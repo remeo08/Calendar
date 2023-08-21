@@ -4,18 +4,15 @@ import Calendar from '@toast-ui/react-calendar';
 import '@toast-ui/calendar/dist/toastui-calendar.min.css';
 
 const SubCalendarHeader = styled.div`
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-bottom: 1px solid rgb(235, 237, 239);
+  height: 3vh;
   color: grey;
+  text-align: center;
+  font-size: 22px;
+  padding: 8px;
 `;
 
 const SubCalendarBox = styled.div`
-  overflow: auto;
-  width: 100%;
-  height: 100%;
+  height: 30vh;
 `;
 
 function SubCalendar() {
@@ -48,7 +45,7 @@ function SubCalendar() {
       <SubCalendarHeader>SubCalender</SubCalendarHeader>
       <SubCalendarBox>
         <Calendar
-          height="160px"
+          height="30vh"
           view="month"
           month={{
             dayNames: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
