@@ -49,6 +49,7 @@ export default function Status({ selectedEvent }) {
       </p>
       <p>{isAllday ? '하루종일' : ''}</p>
       <p>{state === 'Free' ? 'Done' : 'Todo'}</p>
+
       {comments.map((comment) => (
         <CommentList key={comment.id} comment={comment} />
       ))}
@@ -64,5 +65,4 @@ export default function Status({ selectedEvent }) {
 }
 
 // TODO : 편집/삭제 버튼 추가하기
-// TODO : 일정마다 댓글 달 수 있게 추가하기
 // TODO : <p>Calendar: {calendarId}</p> calendarId가 아니라 이름 가져오기

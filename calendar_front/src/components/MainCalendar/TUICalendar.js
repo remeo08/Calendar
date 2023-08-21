@@ -404,6 +404,7 @@ export default function TUICalendar({
       targetEvent.calendarId,
       changes,
     );
+
     getCalInstance().render();
   };
 
@@ -562,7 +563,7 @@ export default function TUICalendar({
                 },
               ],
             }}
-            useDetailPopup={true}
+            useDetailPopup={false}
             useFormPopup={true}
             view={selectedView}
             week={{
@@ -571,8 +572,6 @@ export default function TUICalendar({
               eventView: true,
               taskView: true,
             }}
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
             ref={calendarRef}
             onAfterRenderEvent={onAfterRenderEvent}
             onBeforeDeleteEvent={onBeforeDeleteEvent}
