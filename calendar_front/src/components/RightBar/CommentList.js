@@ -28,6 +28,7 @@ const CommentContent = styled.div`
   padding: 7px;
   margin-top: 3px;
   margin-right: 3px;
+  word-wrap: break-word;
 `;
 
 const CommentList = ({ comment }) => {
