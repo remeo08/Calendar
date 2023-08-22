@@ -3,6 +3,20 @@ import { styled } from 'styled-components';
 import SubCalendar from './SubCalendar';
 import Status from './Status';
 
+function RightBar({ selectedEvent }) {
+  return (
+    <Container>
+      <Wrapper>
+        <SubCalendar />
+      </Wrapper>
+      <Wrapper>
+        <StatusHeader>Status</StatusHeader>
+        <Status selectedEvent={selectedEvent} />
+      </Wrapper>
+    </Container>
+  );
+}
+
 const Container = styled.div`
   width: 15vw;
   display: flex;
@@ -24,19 +38,5 @@ const StatusHeader = styled.div`
   font-size: 22px;
   padding: 4px;
 `;
-
-function RightBar({ selectedEvent }) {
-  return (
-    <Container>
-      <Wrapper>
-        <SubCalendar />
-      </Wrapper>
-      <Wrapper>
-        <StatusHeader>Status</StatusHeader>
-        <Status selectedEvent={selectedEvent} />
-      </Wrapper>
-    </Container>
-  );
-}
 
 export default RightBar;

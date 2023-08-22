@@ -6,6 +6,29 @@ import { eventState } from '../recoilState';
 import RightBar from '../components/RightBar/RightBar';
 import TUICalendar from '../components/MainCalendar/TUICalendar';
 
+function Layout() {
+  const [events, setEvents] = useRecoilState(eventState);
+  const [selectedEvent, setSelectedEvent] = useState(null);
+
+  return (
+    <RecoilRoot>
+      <Container>
+        <Wrapper>
+          <CalendarWrapper>
+            <TUICalendar
+              events={events}
+              setEvents={setEvents}
+              view="month"
+              setSelectedEvent={setSelectedEvent}
+            />
+          </CalendarWrapper>
+          <RightBar selectedEvent={selectedEvent} />
+        </Wrapper>
+      </Container>
+    </RecoilRoot>
+  );
+}
+
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
@@ -31,28 +54,5 @@ const Wrapper = styled.div`
 const CalendarWrapper = styled.div`
   width: 85%;
 `;
-
-function Layout() {
-  const [events, setEvents] = useRecoilState(eventState);
-  const [selectedEvent, setSelectedEvent] = useState(null);
-
-  return (
-    <RecoilRoot>
-      <Container>
-        <Wrapper>
-          <CalendarWrapper>
-            <TUICalendar
-              events={events}
-              setEvents={setEvents}
-              view="month"
-              setSelectedEvent={setSelectedEvent}
-            />
-          </CalendarWrapper>
-          <RightBar selectedEvent={selectedEvent} />
-        </Wrapper>
-      </Container>
-    </RecoilRoot>
-  );
-}
 
 export default Layout;

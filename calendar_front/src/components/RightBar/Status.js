@@ -38,6 +38,20 @@ export default function Status({ selectedEvent }) {
     hour12: true,
   });
 
+  const removeComment = (commentId) => {
+    setComments(comments.filter((comment) => comment.id !== commentId));
+  };
+
+  const editComment = (commentId, updatedDescription) => {
+    setComments(
+      comments.map((comment) =>
+        comment.id === commentId
+          ? { ...comment, description: updatedDescription }
+          : comment,
+      ),
+    );
+  };
+
   return (
     <div>
       <h3>일정 상세 정보</h3>
@@ -51,7 +65,12 @@ export default function Status({ selectedEvent }) {
       <p>{state === 'Free' ? 'Done' : 'Todo'}</p>
 
       {comments.map((comment) => (
-        <CommentList key={comment.id} comment={comment} />
+        <CommentList
+          key={comment.id}
+          comment={comment}
+          removeComment={removeComment}
+          editComment={editComment}
+        />
       ))}
       <CommentEdit
         schedule={selectedEvent.id}
