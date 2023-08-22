@@ -34,17 +34,14 @@ const Wrapper = styled.li`
 `;
 
 const SearchList = styled.div`
-  font-size: 14px;
+  font-size: 16px;
   padding: 6px 0;
   width: 29vw;
   border-bottom: 1px solid rgb(235, 237, 239);
-  letter-spacing: 0.08rem;
   font-weight: 100;
-  line-height: 1.1;
 `;
 const SearchTeam = styled.span`
-  letter-spacing: 0.1rem;
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 100;
 `;
 const NoMatchingData = styled.p`

@@ -41,6 +41,7 @@ const ShowMenuBarHeader = styled.div`
   height: 3vh;
   color: grey;
   text-align: center;
+  font-weight: 100;
   font-size: 22px;
   padding: 8px;
   border-bottom: 1px solid rgb(235, 237, 239);
@@ -52,9 +53,10 @@ const TeamList = styled.label`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  font-weight: 100;
   text-align: center;
   font-size: 20px;
-  padding: 6px;
+  padding: 2px;
 `;
 const Input = styled.input`
   opacity: 1;
@@ -96,7 +98,9 @@ const CalendarHeader = styled.div`
   justify-content: space-evenly;
   height: 10%;
   font-size: 25px;
+  font-weight: 100;
   color: grey;
+  padding-left: 10px;
 `;
 const DateControlBox = styled.div`
   width: 28%;
@@ -117,7 +121,9 @@ const PrevBtn = styled.button`
   outline: none;
   cursor: pointer;
   border: none;
+  font-weight: 100;
   font-size: 14px;
+  background-color: rgb(254, 250, 250);
   color: grey;
   &&:hover {
     transform: translateY(1px);
@@ -137,6 +143,7 @@ const NextBtn = styled.button`
   cursor: pointer;
   border: none;
   font-size: 14px;
+  background-color: rgb(254, 250, 250);
   color: grey;
   &&:hover {
     transform: translateY(1px);
@@ -148,9 +155,10 @@ const NextBtn = styled.button`
 `;
 const TodayBtn = styled.button`
   border-radius: 50px;
-  // box-shadow:
-  //   -1px -1px 10px rgba(180, 180, 180, 0.1),
-  //   1px 1px 10px rgba(180, 180, 180, 0.1);
+  box-shadow:
+    -1px -1px 10px rgba(180, 180, 180, 0.1),
+    1px 1px 10px rgba(180, 180, 180, 0.1);
+  background-color: rgb(254, 250, 250);
   outline: none;
   cursor: pointer;
   border: none;

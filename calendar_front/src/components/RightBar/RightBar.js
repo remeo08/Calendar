@@ -22,6 +22,7 @@ const Wrapper = styled.div`
 const StatusHeader = styled.div`
   height: 20px;
   color: grey;
+  font-weight: 100;
   text-align: center;
   font-size: 22px;
   padding: 4px;
