@@ -106,7 +106,20 @@ const ATMbutton = styled.button`
 `;
 function TeamAddModal() {
   const [teamAddModalIsOpen, setTeamAddModalIsOpen] = useState(false);
+  const [teamname, setTeamname] = useState('');
+  const [nickname, setNickname] = useState('');
+  const [selectedColor, setSelectedColor] = useState('#F44E3B');
 
+  // 폼 제출 핸들러
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    // 폼 입력을 콘솔에 기록
+    console.log('팀 이름:', teamname);
+    console.log('별명:', nickname);
+    console.log('선택한 색상:', selectedColor);
+    setTeamAddModalIsOpen(false);
+  };
   return (
     <TeamAddContainer>
       <Wrapper>
@@ -117,15 +130,25 @@ function TeamAddModal() {
       {teamAddModalIsOpen && (
         <TAddModal>
           <TModalWrapper>
-            <TMForm>
-              <h2>ADD TEAM</h2>
-              <TAMinput type="text" placeholder="teamname"></TAMinput>
-              <TAMinput type="text" placeholder="nickname"></TAMinput>
+            <TMForm onSubmit={handleSubmit}>
+              <h2>ADD CALENDAR</h2>
+              <TAMinput
+                type="text"
+                placeholder="teamname"
+                value={teamname}
+                onChange={(e) => setTeamname(e.target.value)}
+              />
+              <TAMinput
+                type="text"
+                placeholder="nickname"
+                value={nickname}
+                onChange={(e) => setNickname(e.target.value)}
+              />
               select team color
-              <ColorPicker />
+              <ColorPicker onSelectColor={setSelectedColor} />
               <BtnColumn>
-                <ATMbutton>CANCEL</ATMbutton>
-                <ATMbutton type="submit">MAKE NEW CALENDAR!</ATMbutton>
+                <ATMbutton>cancel</ATMbutton>
+                <ATMbutton type="submit">make new calendar!</ATMbutton>
               </BtnColumn>
             </TMForm>
           </TModalWrapper>

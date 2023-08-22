@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Circle from '@uiw/react-color-circle';
 
-export default function ColorPicker() {
+export default function ColorPicker({ onSelectColor }) {
   const [hex, setHex] = useState('#F44E3B');
   return (
     <Circle
@@ -26,6 +26,7 @@ export default function ColorPicker() {
       color={hex}
       onChange={(color) => {
         setHex(color.hex);
+        onSelectColor({ hex: color.hex }); // 선택한 색상을 객체 형태로 전달
       }}
     />
   );
