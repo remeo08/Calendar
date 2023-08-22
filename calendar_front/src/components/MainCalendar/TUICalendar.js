@@ -11,6 +11,8 @@ import 'tui-time-picker/dist/tui-time-picker.css';
 import { theme } from './theme';
 import { addDate, addHours, subtractDate } from './utils';
 
+import instance from '../../api';
+
 const today = new TZDate();
 const viewModeOptions = [
   {
@@ -421,20 +423,12 @@ export default function TUICalendar({
       targetEvent.calendarId,
       changes,
     );
+
     getCalInstance().render();
   };
 
-  const onBeforeCreateEvent = (eventData) => {
-    console.log('dididi', eventData);
-    // const eventForBack = {
-    //   team: eventData.calendarId,
-    //   title: eventData.title,
-    //   description: eventData.location,
-    //   start_date: eventData.start,
-    //   end_date: eventData.end,
-    //   state: eventData.state,
-    // };
-    // axios.post('url', eventForBack);
+  const onBeforeCreateEvent = async (eventData) => {
+    console.log(eventData);
     const event = {
       calendarId: eventData.calendarId || '',
       id: String(eventCounter), //back에서 받아온 id로 변경하기
@@ -449,11 +443,26 @@ export default function TUICalendar({
       isPrivate: eventData.isPrivate,
     };
 
-    setEventCounter(eventCounter + 1);
-    getCalInstance().createEvents([event]);
+    try {
+      const eventForBack = await instance.post('/api/v1/schedules/', {
+        title: eventData.title,
+        description: eventData.location,
+        state: eventData.state,
+        start_date: eventData.start,
+        end_date: eventData.end,
+        user: eventData.user,
+        team: eventData.calendarId,
+      });
+      // axios.post('url', eventForBack);
 
-    setEvents([...events, event]);
-    setSelectedEvent(event);
+      console.log('일정 생성 API 응답', eventForBack.data);
+      setEventCounter(eventCounter + 1);
+      setEvents([...events, event]);
+      setSelectedEvent(event);
+    } catch (error) {
+      console.log('일정 생성 API 요청 실패', error);
+    }
+    getCalInstance().createEvents([event]);
   };
 
   return (
@@ -584,7 +593,7 @@ export default function TUICalendar({
                 },
               ],
             }}
-            useDetailPopup={true}
+            useDetailPopup={false}
             useFormPopup={true}
             view={selectedView}
             week={{
@@ -593,8 +602,6 @@ export default function TUICalendar({
               eventView: true,
               taskView: true,
             }}
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
             ref={calendarRef}
             onAfterRenderEvent={onAfterRenderEvent}
             onBeforeDeleteEvent={onBeforeDeleteEvent}
@@ -609,3 +616,141 @@ export default function TUICalendar({
     </CalendarContainer>
   );
 }
+
+const CalendarContainer = styled.div`
+  display: flex;
+  height: 90vh;
+`;
+const ShowMenuBar = styled.div`
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid rgb(235, 237, 239);
+  width: 15vw;
+`;
+const ShowMenuBarHeader = styled.div`
+  height: 3vh;
+  color: grey;
+  text-align: center;
+  font-size: 22px;
+  padding: 8px;
+  border-bottom: 1px solid rgb(235, 237, 239);
+  margin-bottom: 22px;
+`;
+
+const TeamList = styled.label`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 20px;
+  padding: 6px;
+`;
+const Input = styled.input`
+  opacity: 1;
+  -webkit-appearance: none;
+  cursor: pointer;
+  height: 25px;
+  width: 25px;
+  box-shadow:
+    -10px -10px 10px rgba(255, 255, 255, 0.8),
+    10px 10px 10px rgba(0, 0, 70, 0.18);
+  border-radius: 50%;
+  border: none;
+
+  transition: 0.5s;
+  &:checked {
+    box-shadow:
+      -10px -10px 10px rgba(255, 255, 255, 0.8),
+      10px 10px 10px rgba(70, 70, 70, 0.18),
+      inset -10px -10px 10px rgba(255, 255, 255, 0.3),
+      inset 10px 10px 10px rgba(70, 70, 70, 0.18);
+    transition: 0.5s;
+    background-color: ${(props) => props.bgColor};
+  }
+`;
+const MIDContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 60vw;
+`;
+const CalendarBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+`;
+const CalendarHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 10%;
+  font-size: 25px;
+  color: grey;
+`;
+const DateControlBox = styled.div`
+  width: 28%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+const DateViewSelectBOx = styled.div`
+  width: 72%;
+  display: flex;
+  justify-content: end;
+`;
+const PrevBtn = styled.button`
+  border-radius: 50px;
+  box-shadow:
+    -1px -1px 10px rgba(180, 180, 180, 0.1),
+    1px 1px 10px rgba(180, 180, 180, 0.1);
+  outline: none;
+  cursor: pointer;
+  border: none;
+  font-size: 14px;
+  color: grey;
+  &&:hover {
+    transform: translateY(1px);
+    box-shadow: none;
+  }
+  &&:active {
+    opacity: 0.5;
+  }
+`;
+const DATEBox = styled.div``;
+const NextBtn = styled.button`
+  border-radius: 50px;
+  box-shadow:
+    -1px -1px 10px rgba(180, 180, 180, 0.1),
+    1px 1px 10px rgba(180, 180, 180, 0.1);
+  outline: none;
+  cursor: pointer;
+  border: none;
+  font-size: 14px;
+  color: grey;
+  &&:hover {
+    transform: translateY(1px);
+    box-shadow: none;
+  }
+  &&:active {
+    opacity: 0.5;
+  }
+`;
+const TodayBtn = styled.button`
+  border-radius: 50px;
+  // box-shadow:
+  //   -1px -1px 10px rgba(180, 180, 180, 0.1),
+  //   1px 1px 10px rgba(180, 180, 180, 0.1);
+  outline: none;
+  cursor: pointer;
+  border: none;
+  font-size: 14px;
+  color: grey;
+  &&:hover {
+    transform: translateY(1px);
+    box-shadow: none;
+  }
+  &&:active {
+    opacity: 0.5;
+  }
+`;

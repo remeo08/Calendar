@@ -38,6 +38,20 @@ export default function Status({ selectedEvent }) {
     hour12: true,
   });
 
+  const removeComment = (commentId) => {
+    setComments(comments.filter((comment) => comment.id !== commentId));
+  };
+
+  const editComment = (commentId, updatedDescription) => {
+    setComments(
+      comments.map((comment) =>
+        comment.id === commentId
+          ? { ...comment, description: updatedDescription }
+          : comment,
+      ),
+    );
+  };
+
   return (
     <div>
       <h3>일정 상세 정보</h3>
@@ -49,8 +63,14 @@ export default function Status({ selectedEvent }) {
       </p>
       <p>{isAllday ? '하루종일' : ''}</p>
       <p>{state === 'Free' ? 'Done' : 'Todo'}</p>
+
       {comments.map((comment) => (
-        <CommentList key={comment.id} comment={comment} />
+        <CommentList
+          key={comment.id}
+          comment={comment}
+          removeComment={removeComment}
+          editComment={editComment}
+        />
       ))}
       <CommentEdit
         schedule={selectedEvent.id}
@@ -64,5 +84,4 @@ export default function Status({ selectedEvent }) {
 }
 
 // TODO : 편집/삭제 버튼 추가하기
-// TODO : 일정마다 댓글 달 수 있게 추가하기
 // TODO : <p>Calendar: {calendarId}</p> calendarId가 아니라 이름 가져오기
