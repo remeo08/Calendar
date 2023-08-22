@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { styled } from 'styled-components';
 
 import Header from './Header';
-
+import TeamAddModal from './TeamAddModal';
 import Calendar from '@toast-ui/react-calendar';
 import { TZDate } from '@toast-ui/calendar';
 import '@toast-ui/calendar/dist/toastui-calendar.min.css';
@@ -167,10 +167,10 @@ const TodayBtn = styled.button`
 const initialCalendars = [
   {
     id: '0',
-    name: 'team1',
-    backgroundColor: '#9e5fff',
-    borderColor: '#9e5fff',
-    dragBackgroundColor: '#9e5fff',
+    name: 'MY',
+    backgroundColor: 'red',
+    borderColor: 'red',
+    dragBackgroundColor: 'red',
   },
   {
     id: '1',
@@ -236,6 +236,14 @@ const initialEvents = [
     start: today,
     end: addHours(today, 1),
   },
+  {
+    id: '5',
+    calendarId: '3',
+    title: '낮잠',
+    category: 'time',
+    start: today,
+    end: addHours(today, 1),
+  },
 ];
 
 export default function TUICalendar({
@@ -250,6 +258,7 @@ export default function TUICalendar({
       isChecked: true, // 선택 상태를 초기화합니다.
     })),
   );
+
   const filteredEvents = initialEvents.filter(
     (event) =>
       selectedCalendars.find((calendar) => calendar.id === event.calendarId)
@@ -462,9 +471,14 @@ export default function TUICalendar({
             {calendar.name}
           </TeamList>
         ))}
+        <TeamAddModal />
       </ShowMenuBar>
       <MIDContainer>
-        <Header />
+        <Header
+          data={initialEvents}
+          initialCalendars={initialCalendars}
+          initialEvents={initialEvents}
+        />
         <CalendarBox>
           <CalendarHeader>
             <DateControlBox>
