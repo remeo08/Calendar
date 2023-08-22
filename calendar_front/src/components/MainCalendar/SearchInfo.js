@@ -26,7 +26,7 @@ const SearchInfoContainer = styled.div`
   z-index: 1005;
 `;
 
-const Wrapper = styled.div`
+const Wrapper = styled.li`
   display: flex;
   flex-direction: column;
   padding: 8px;
@@ -35,11 +35,24 @@ const Wrapper = styled.div`
 
 const SearchList = styled.div`
   font-size: 14px;
-  padding: 3px 0;
+  padding: 6px 0;
+  width: 29vw;
   border-bottom: 1px solid rgb(235, 237, 239);
+  letter-spacing: 0.08rem;
+  font-weight: 100;
+  line-height: 1.1;
+`;
+const SearchTeam = styled.span`
+  letter-spacing: 0.1rem;
+  font-size: 16px;
+  font-weight: 100;
+`;
+const NoMatchingData = styled.p`
+  color: lightgrey;
+  font-size: 14px;
 `;
 
-function SearchInfo({ onClose }) {
+function SearchInfo({ onClose, matchingData, initialCalendars }) {
   const overlayRef = useRef(null);
 
   const handleOverlayClick = (event) => {
@@ -52,11 +65,34 @@ function SearchInfo({ onClose }) {
     <Overlay ref={overlayRef} onClick={handleOverlayClick}>
       <SearchInfoContainer>
         <Wrapper>
-          <SearchList>event list.map/"teaminfo"/"title"/"date"</SearchList>
-          <SearchList>event list.map/"teaminfo"/"title"/"date"</SearchList>
-          <SearchList>event list.map/"teaminfo"/"title"/"date"</SearchList>
-          <SearchList>event list.map/"teaminfo"/"title"/"date"</SearchList>
-          <SearchList>event list.map/"teaminfo"/"title"/"date"</SearchList>
+          {matchingData.length >= 1 ? (
+            <ul>
+              {matchingData.map((item) => {
+                console.log('Matching Item:', item);
+                const foundCalendar = initialCalendars.find(
+                  (calendar) => calendar.id === item.calendarId,
+                );
+
+                return (
+                  <SearchList key={item.id}>
+                    <SearchTeam>
+                      {foundCalendar ? foundCalendar.name : 'N/A'}
+                    </SearchTeam>
+                    <br />
+                    Title: {item.title}
+                    <br />
+                    Start:{' '}
+                    {item.start instanceof Date ? item.start.toString() : 'N/A'}
+                    <br />
+                    End:{' '}
+                    {item.end instanceof Date ? item.end.toString() : 'N/A'}
+                  </SearchList>
+                );
+              })}
+            </ul>
+          ) : (
+            <NoMatchingData>No matching events</NoMatchingData>
+          )}
         </Wrapper>
       </SearchInfoContainer>
     </Overlay>

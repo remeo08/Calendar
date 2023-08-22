@@ -1,7 +1,7 @@
 import { styled } from 'styled-components';
-import { LuSettings, LuBell, LuSearch } from 'react-icons/lu';
+import { LuSettings, LuBell } from 'react-icons/lu';
 import SearchInfo from './SearchInfo';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -40,20 +40,49 @@ const IconBox = styled.div`
   padding-right: 0.6vw;
 `;
 
-function Header() {
+function Header({ data, initialCalendars, initialEvents }) {
   const [searchIsOpen, setSearchIsOpen] = useState(false);
+  const [inputValue, setInputValue] = useState('');
+
+  const handleInputChange = (event) => {
+    setInputValue(event.target.value);
+    if (event.target.value.length >= 1) {
+      setSearchIsOpen(true);
+    } else {
+      setSearchIsOpen(false);
+    }
+  };
+
+  const matchingData =
+    inputValue.length >= 1
+      ? data.filter((item) =>
+          item.title.toLowerCase().includes(inputValue.toLowerCase()),
+        )
+      : [];
+
+  const handleSearchBoxClick = () => {
+    if (inputValue.length >= 1) {
+      setSearchIsOpen(true);
+    }
+  };
 
   return (
     <HeaderContainer>
       <Blank></Blank>
       <SearchBox
-        onClick={() => {
-          setSearchIsOpen(!searchIsOpen);
-        }}
+        type="text"
+        value={inputValue}
+        onChange={handleInputChange}
+        onClick={handleSearchBoxClick}
         placeholder="search"
       />
       {searchIsOpen ? (
-        <SearchInfo onClose={() => setSearchIsOpen(false)} />
+        <SearchInfo
+          onClose={() => setSearchIsOpen(false)}
+          matchingData={matchingData}
+          initialCalendars={initialCalendars}
+          initialEvents={initialEvents}
+        />
       ) : null}
       <IconBox>
         <LuBell />
