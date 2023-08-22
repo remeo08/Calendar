@@ -6,6 +6,7 @@ import '@toast-ui/calendar/dist/toastui-calendar.min.css';
 const SubCalendarHeader = styled.div`
   height: 3vh;
   color: grey;
+  font-weight: 100;
   text-align: center;
   font-size: 22px;
   padding: 8px;
