@@ -53,6 +53,10 @@ function SearchInfo({ onClose }) {
       <SearchInfoContainer>
         <Wrapper>
           <SearchList>event list.map/"teaminfo"/"title"/"date"</SearchList>
+          <SearchList>event list.map/"teaminfo"/"title"/"date"</SearchList>
+          <SearchList>event list.map/"teaminfo"/"title"/"date"</SearchList>
+          <SearchList>event list.map/"teaminfo"/"title"/"date"</SearchList>
+          <SearchList>event list.map/"teaminfo"/"title"/"date"</SearchList>
         </Wrapper>
       </SearchInfoContainer>
     </Overlay>
